@@ -64,14 +64,14 @@ router.put( '/:pid', (req,res) => {
         })
        const updateProduct = {
            id: element.id,
-           title: req.body.title,
-           description:req.body.description,
-           code:req.body.code,
-           price:req.body.price,
-           status: req.body.status,
-           stock:req.body.stock,
-           category: req.body.category,
-           thumbnails:req.body.thumbnails
+           title: req.body?.title ? req.body.title : element.title ,
+           description:req?.body.description ? req.body.description : element.description,
+           code:req.body?.code ?  req.body.code : element.code,
+           price:req.body?.price ?  req.body.price : element.price,
+           status: req.body?.status ? req.body.status : element.status,
+           stock:req.body?.stock ?  req.body.stock : element.stock,
+           category: req?.body.category ?  req.body.category : element.category,
+           thumbnails:req?.body.thumbnails ?  req.body.thumbnails : element.thumbnails
        }
         products[product]=updateProduct;
         writeProducts(products);
