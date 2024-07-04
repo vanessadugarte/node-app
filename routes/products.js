@@ -40,6 +40,47 @@ router.post( '/', (req,res) => {
 
 })
 
+router.get( '/:pid', (req,res) => {
+    const products = readProducts();
+    const product = products.find((el)=>{
+        return el.id === req.params.pid
+    })
+    if(product){
+        res.json(product);
+    } else {
+        res.status(404).send("No se encontró el producto")
+    }
+});
+
+
+router.put( '/:pid', (req,res) => {
+    const products = readProducts();
+    const product = products.findIndex((el)=>{
+        return el.id === req.params.pid
+    })
+    if(product !== -1){
+        const element = products.find((el)=>{
+            return el.id === req.params.pid
+        })
+       const updateProduct = {
+           id: element.id,
+           title: req.body.title,
+           description:req.body.description,
+           code:req.body.code,
+           price:req.body.price,
+           status: req.body.status,
+           stock:req.body.stock,
+           category: req.body.category,
+           thumbnails:req.body.thumbnails
+       }
+        products[product]=updateProduct;
+        writeProducts(products);
+        res.status(200).json(updateProduct);
+    } else {
+        res.status(404).send("No se encontró el producto")
+    }
+
+})
 
 module.exports = router;
 

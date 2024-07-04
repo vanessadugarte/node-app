@@ -1,3 +1,44 @@
 [
-
+  {
+    "id": "9cf147f9-4cac-4769-8655-10a729182875",
+    "title": "Biodegradable Pots",
+    "description": "Pack of 20 biodegradable seedling pots.",
+    "code": "BPOTS020",
+    "price": 4.25,
+    "status": true,
+    "stock": 400,
+    "category": "Pots",
+    "thumbnails": [
+      "images/biodegradable_pots_1.jpg",
+      "images/biodegradable_pots_2.jpg"
+    ]
+  },
+  {
+    "id": "a602359a-13c5-4293-b041-ccbea774eaae",
+    "title": "planta modif",
+    "description": "Pack of 20 biodegradable seedling pots.",
+    "code": "BPOTS020",
+    "price": 4.25,
+    "status": true,
+    "stock": 400,
+    "category": "Pots",
+    "thumbnails": [
+      "images/biodegradable_pots_1.jpg",
+      "images/biodegradable_pots_2.jpg"
+    ]
+  },
+  {
+    "id": "9e9b3ba0-adee-4ced-abb4-f9ca50d758b8",
+    "title": "chao",
+    "description": "Pack of 20 bio5555dling pots.",
+    "code": "BP555OTS020",
+    "price": 4.25555,
+    "status": false,
+    "stock": 45500,
+    "category": "Po55ts",
+    "thumbnails": [
+      "images/biode55gradable_pots_1.jpg",
+      "images/biodeg555radable_pots_2.jpg"
+    ]
+  }
 ]
