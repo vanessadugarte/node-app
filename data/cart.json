@@ -1,14 +1,19 @@
 [
   {
     "id": "65065a01-9ada-4570-a4af-b72daf700e24",
-    "product": []
+    "products": []
   },
   {
     "id": "74a249de-ebee-40a2-bc94-f609f1f38404",
-    "product": []
+    "products": []
   },
   {
     "id": "99bb7937-f956-4a6d-a34a-416ac77458d2",
-    "product": []
+    "products": [
+      {
+        "product": "9cf147f9-4cac-4769-8655-10a729182875",
+        "quantity": 4
+      }
+    ]
   }
 ]
