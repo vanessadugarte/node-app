@@ -88,7 +88,7 @@ router.delete( '/:pid', (req,res) => {
         return el.id === req.params.pid
     })
     if(product === -1) {
-       return res.status(404).send("product not found")
+       return res.status(404).send("No se encontró el producto")
     }
     products.splice(product,1);
     writeProducts(products);
