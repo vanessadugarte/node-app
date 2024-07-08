@@ -82,5 +82,19 @@ router.put( '/:pid', (req,res) => {
 
 })
 
+router.delete( '/:pid', (req,res) => {
+    const products = readProducts();
+    const product = products.findIndex((el)=>{
+        return el.id === req.params.pid
+    })
+    if(product === -1) {
+       return res.status(404).send("product not found")
+    }
+    products.splice(product,1);
+    writeProducts(products);
+    res.status(200).send();
+})
+
+
 module.exports = router;
 
