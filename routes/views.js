@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 
-const productsFilePath = path.join(__dirname, '../data/products.json');
+const productsFilePath = path.join(__dirname, '../data/product.json');
 const readProducts = () => {
     try {
         const data = fs.readFileSync(productsFilePath);
@@ -18,7 +18,11 @@ const readProducts = () => {
 
 router.get('/', (req, res) => {
     const products = readProducts();
-    res.render('home', { title: 'Home', products });
+    res.render('home', { title: 'Home from handler', products });
+});
+
+router.get('/test', (req, res) => {
+    res.render('test', { title: 'test title', text: 'textooo' });
 });
 
 router.get('/realtimeproducts', (req, res) => {

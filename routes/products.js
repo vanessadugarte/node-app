@@ -3,9 +3,20 @@ const router = express.Router();
 const path = require('path');
 const fs = require ('fs');
 const { v4: uuidv4 } = require('uuid');
+const {io} = require ('../index')
 
 const productFilePath = path.join(__dirname, '../data/product.json');
-const readProducts= () => JSON.parse(fs.readFileSync(productFilePath, 'utf8')) ;
+const readProducts = () => {
+    try {
+        const data = fs.readFileSync(productFilePath);
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            return [];
+        }
+        throw error;
+    }
+};
 const writeProducts = (data) => fs.writeFileSync(productFilePath, JSON.stringify(data, null, 2));
 
 
@@ -39,7 +50,7 @@ module.exports= (io) => {
         products.push(obj);
         writeProducts(products);
         res.status(201).json(obj);
-
+        io.emit('updateProducts', products);
     })
 
     router.get('/:pid', (req, res) => {
@@ -78,6 +89,7 @@ module.exports= (io) => {
             products[product] = updateProduct;
             writeProducts(products);
             res.status(200).json(updateProduct);
+            io.emit('updateProducts', products);
         } else {
             res.status(404).send("No se encontró el producto")
         }
@@ -95,6 +107,7 @@ module.exports= (io) => {
         products.splice(product, 1);
         writeProducts(products);
         res.status(200).send();
+        io.emit('deleteProducts', products);
     })
     return router;
 }
