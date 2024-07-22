@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Products</title>
+</head>
+<body>
+<h1>Real-Time Product List</h1>
+<ul id="product-list">
+    {{#each products}}
+        <li>{{this.title}}</li>
+    {{/each}}
+</ul>
+
+<form id="product-form">
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="text" id="description" placeholder="Description" required>
+    <input type="text" id="code" placeholder="Code" required>
+    <input type="number" id="price" placeholder="Price" required>
+    <input type="number" id="stock" placeholder="Stock" required>
+    <input type="text" id="category" placeholder="Category" required>
+    <button type="submit">Add Product</button>
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    // Listen for product updates
+    socket.on('productUpdate', (products) => {
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        products.forEach(product => {
+            const li = document.createElement('li');
+            li.textContent = product.title;
+            productList.appendChild(li);
+        });
+    });
+
+    // Handle form submission
+    document.getElementById('product-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const product = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            code: document.getElementById('code').value,
+            price: parseFloat(document.getElementById('price').value),
+            stock: parseInt(document.getElementById('stock').value),
+            category: document.getElementById('category').value
+        };
+        socket.emit('addProduct', product);
+    });
+</script>
+</body>
+</html>
